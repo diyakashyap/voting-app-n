@@ -8,6 +8,6 @@ metadata:
 spec:
   containers:
     - name: result-app
-      image: diyakashyap/examplevotingapp_result:v1
+      image: diya0311/result:v1
       ports:
         - containerPort: 80

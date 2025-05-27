@@ -8,6 +8,6 @@ metadata:
 spec:
   containers:
     - name: voting-app
-      image: diyakashyap/examplevotingapp_vote:v1
+      image: diya0311/vote:v1
       ports:
         - containerPort: 80
