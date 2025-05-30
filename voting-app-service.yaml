@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: voting-service 
   labels:
-    name: voting-service
     app: demo-voting-app
 spec:
   type: NodePort
@@ -12,5 +11,4 @@ spec:
       targetPort: 80
       nodePort: 30005
   selector:
-    name: voting-app-pod
     app: demo-voting-app
