@@ -1,0 +1,117 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vote-dep
+  labels:
+    app: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-voting-app
+  template:
+    metadata:
+      name: voting-app-pod
+      labels: 
+        app: demo-voting-app
+    spec:
+      containers:
+        - name: voting-app
+          image: diya0311/vote:v1
+          ports:
+            - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result-app-dep
+  labels:
+    app: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-voting-app
+  template:
+    metadata:
+      name: result-app-pod
+      labels:
+        app: demo-voting-app
+    spec:
+      containers:
+        - name: result-app
+          image: diya0311/result:v1
+          ports:
+            - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-dep
+  labels:
+    app: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-voting-app
+  template:
+    metadata:
+      name: redis-pod
+      labels:
+        app: demo-voting-app
+    spec:
+      containers:
+        - name: redis-pod
+          image: redis
+          ports:
+            - containerPort: 6379
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-dep
+  labels:
+    apps: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-voting-app
+  template:
+    metadata:
+      name: postgres-pod
+      labels:
+        app: demo-voting-app
+    spec:
+      containers:
+        - name: postgres
+          image: postgres
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-dep
+  labels:
+    app: demo-voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-voting-app
+  template:
+    metadata:
+      name: worker-app-pod
+      labels:
+        app: demo-voting-app
+    spec:
+      containers:
+        - name: worker-app
+          image: diya0311/worker:v1
